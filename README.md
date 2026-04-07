@@ -789,7 +789,7 @@ php spark serve
 4. Buka di browser:
 
 ```
-http://localhost:8080/user/login
+localhost/lab7_php_ci/ci4/public/login
 ```
 
 ---
@@ -808,7 +808,8 @@ http://localhost:8080/user/login
 * Halaman admin terlindungi 
 * Redirect berjalan dengan baik 
 
-![WhatsApp Image 2026-04-03 at 12 41 50](https://github.com/user-attachments/assets/5dcd7c1e-a0ea-4821-a3ad-f28b952d20fd)
+<img width="1365" height="680" alt="Screenshot 2026-04-07 223437" src="https://github.com/user-attachments/assets/85debd08-ff40-4364-8908-233b9fb22742" />
+
 
 ---
 
