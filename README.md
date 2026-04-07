@@ -498,51 +498,51 @@ Praktikum ini melatih kemampuan mahasiswa dalam membuat CRUD menggunakan CI4, me
 
 # Screenshot
 
+# Screenshot
+
 1. Halaman Artikel
-
+   
 Halaman artikel adalah halaman yang menampilkan daftar semua artikel yang ada di database.
-<img width="1365" height="678" alt="artikel" src="https://github.com/user-attachments/assets/8b63e952-1d3e-4fe2-81e7-004ffa0c593b" />
 
+![artikel](https://github.com/user-attachments/assets/03c6cc7c-f6a4-41bd-9303-9055724b5b18)
 
 ---
 
 2. Halaman Detail Artikel
-
+   
 Halaman detali artikel digunakan untuk menampilkan isi artikel secara lengkap.
 
-<img width="1365" height="681" alt="detail artikel" src="https://github.com/user-attachments/assets/486f647f-b2cf-4b92-8755-3624b0718f7b" />
+![detail_artikel](https://github.com/user-attachments/assets/e1ccca31-3361-4432-92c2-f5b7d905b824)
 
 ---
 
-3. Halaman Admin
-
+3. Halaman Admin 
 Halaman admin adalah halaman yang digunakan untuk mengelola data artikel.
-
-<img width="1365" height="493" alt="admin" src="https://github.com/user-attachments/assets/8a6e4a62-c561-4dd9-b43b-52caf1badc76" />
+![admin](https://github.com/user-attachments/assets/fb6cd59a-0974-40b1-a14e-9b549c49fa7e)
 
 ---
 
 4. Hapus Artikel
-
+   
 Fitur hapus artikel digunakan untuk menghapus data artikel dari database.
 
-<img width="552" height="187" alt="hapus artikel" src="https://github.com/user-attachments/assets/db8380ba-7139-45d0-9b0a-f0285d071fa4" />
+![hapus_artikel](https://github.com/user-attachments/assets/a286820a-edbb-4d7a-81a1-decbe5e4dd72)
 
 ---
 
 5. Edit Artikel
-
+   
 Fitur edit artikel digunakan untuk mengubah atau memperbarui data artikel yang sudah ada.
 
-<img width="1365" height="446" alt="edit artikel" src="https://github.com/user-attachments/assets/c5a3e536-c6e2-47d6-a93b-34b3ad64a199" />
+![edit_artikel](https://github.com/user-attachments/assets/8343de0a-253a-4c2f-b72a-49f83d523639)
 
 ---
 
 6. Tambah Artikel
-
+   
 Fitur tambah artikel digunakan untuk menambahkan artikel ke dalam database.
 
-<img width="1365" height="420" alt="tambah artikel" src="https://github.com/user-attachments/assets/b4a24131-d3f5-4194-b52c-dddaca90b014" />
+![tambah_artikel](https://github.com/user-attachments/assets/ba074e65-2493-4c08-bc2e-94b231b3da97)
 
 ---
 
