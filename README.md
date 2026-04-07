@@ -571,3 +571,117 @@ Fitur tambah artikel digunakan untuk menambahkan artikel ke dalam database.
 
 ---
 
+# Laporan Praktikum Pemrograman Web 2
+
+## Praktikum 3: View Layout dan View Cell (CodeIgniter 4)
+
+##  Tujuan Praktikum
+
+1. Memahami konsep View Layout di CodeIgniter 4
+2. Menggunakan View Layout untuk template tampilan
+3. Memahami dan mengimplementasikan View Cell
+4. Menggunakan View Cell untuk komponen UI modular
+
+---
+
+##  Langkah-Langkah Praktikum
+
+### 1. Membuat Layout Utama
+
+Membuat folder `layout` di dalam `app/Views/`, kemudian membuat file `main.php`.
+
+Fungsi:
+
+* Sebagai template utama (header, navbar, footer)
+* Menggunakan `renderSection('content')` untuk isi halaman
+
+---
+
+### 2. Modifikasi View Home
+
+Mengubah file `home.php` agar menggunakan layout:
+
+```php
+<?= $this->extend('layout/main') ?>
+
+<?= $this->section('content') ?>
+<h1><?= $title; ?></h1>
+<p><?= $content; ?></p>
+<?= $this->endSection() ?>
+
+---
+
+### 3. Membuat View Cell
+
+Membuat folder `Cells` dan file `ArtikelTerkini.php`.
+
+Fungsi:
+
+* Menampilkan artikel terbaru di sidebar
+* Mengambil data dari database
+
+```php
+$model->orderBy('created_at', 'DESC')->limit(5)->findAll();
+
+---
+
+### 4. Membuat View untuk View Cell
+
+Membuat folder `components` dan file `artikel_terkini.php`.
+
+Fungsi:
+
+* Menampilkan daftar artikel dalam bentuk list
+
+---
+
+### 5. Menambahkan Field Tanggal pada Database
+
+Menambahkan field `created_at` untuk menampilkan artikel terbaru.
+
+```sql
+ALTER TABLE artikel 
+ADD created_at DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+---
+
+### 6. Menampilkan Data Dinamis
+
+Artikel ditampilkan berdasarkan tanggal terbaru menggunakan:
+
+```php
+orderBy('created_at', 'DESC')
+```
+
+##  Kesimpulan
+
+Pada praktikum ini, mahasiswa berhasil:
+
+* Menggunakan View Layout untuk template
+* Menggunakan View Cell untuk sidebar
+* Menampilkan data artikel dari database
+* Mengurutkan artikel berdasarkan tanggal terbaru
+
+## Screenshot
+
+## Tampilan Halaman Home dengan Layout Lengkap
+![WhatsApp Image 2026-03-25 at 13 40 58](https://github.com/user-attachments/assets/40f99f0d-99f9-41db-ab52-dbea5858c9c4)
+
+## Tampilan Widget Artikel Terkini
+![WhatsApp Image 2026-03-25 at 13 50 06](https://github.com/user-attachments/assets/9707c9e8-9c13-4e24-b77c-46af88fa4799)
+
+##  Struktur Tabel Database - Artikel
+![WhatsApp Image 2026-03-25 at 13 51 45](https://github.com/user-attachments/assets/b8d74d93-2df5-469f-a0e0-f3b69a19085a)
+
+## Pertanyaan dan Tugas 
+1. Apa manfaat utama dari penggunaan View Layout dalam pengembangan aplikasi?
+
+jawab: View Layout digunakan untuk membuat template tampilan utama yang dapat digunakan ulang sehingga menghindari duplikasi kode, menjaga konsistensi desain, serta      memudahkan proses pengembangan dan maintenance aplikasi.
+
+2. Jelaskan perbedaan antara View Cell dan View biasa.
+
+jawab: View Cell digunakan untuk membuat komponen kecil yang dapat dipanggil di dalam view dan bisa digunakan kembali di berbagai halaman, sedangkan View biasa digunakan untuk menampilkan satu halaman penuh yang dipanggil dari controller.
+
+3. Ubah View Cell agar hanya menampilkan post dengan kategori tertentu. 
+
+jawab: View Cell dapat diubah agar hanya menampilkan post dengan kategori tertentu dengan menambahkan parameter kategori pada method dan menggunakan query where untuk memfilter data sesuai kategori yang diinginkan.
