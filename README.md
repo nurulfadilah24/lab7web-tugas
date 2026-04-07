@@ -543,3 +543,31 @@ Fitur edit artikel digunakan untuk mengubah atau memperbarui data artikel yang s
 Fitur tambah artikel digunakan untuk menambahkan artikel ke dalam database.
 
 <img width="1365" height="420" alt="tambah artikel" src="https://github.com/user-attachments/assets/b4a24131-d3f5-4194-b52c-dddaca90b014" />
+
+---
+
+
+---
+
+## Screenshot
+
+**Halaman Admin:**  
+![Admin](screenshots/admin.png)  
+
+**Daftar Artikel:**  
+![Artikel](screenshots/artikel.png)  
+
+**Detail Artikel:**  
+![Detail Artikel](screenshots/detail artikel.png)  
+
+**Edit Artikel:**  
+![Edit Artikel](screenshots/edit artikel.png)  
+
+**Hapus Artikel:**  
+![Hapus Artikel](screenshots/hapus artikel.png)  
+
+**Tambah Artikel:**  
+![Tambah Artikel](screenshots/tambah artikel.png)  
+
+---
+
