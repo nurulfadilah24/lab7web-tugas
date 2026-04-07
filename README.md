@@ -684,7 +684,8 @@ jawab: View Cell dapat diubah agar hanya menampilkan post dengan kategori terten
 
 ##  Struktur Database
 ### Tabel: `user`
-<img width="1178" height="158" alt="Cuplikan layar 2026-04-03 130435" src="https://github.com/user-attachments/assets/9c27fc86-77a2-43a2-bef4-26e1d1288983" />
+<img width="802" height="85" alt="image" src="https://github.com/user-attachments/assets/16e50b9d-aaec-4283-b4a8-ccb6721ab6f0" />
+
 
 ---
 
@@ -770,13 +771,13 @@ session.savePath = writable/session
 
 ---
 
-## ▶ Cara Menjalankan Project
+##  Cara Menjalankan Project
 
 1. Jalankan XAMPP (Apache & MySQL)
 2. Masuk ke folder project:
 
 ```bash
-cd C:\xampp_new\htdocs\lab7_php_ci\ci4
+C:\xampp_8\htdocs\lab7_php_ci\ci4
 ```
 
 3. Jalankan server:
@@ -802,10 +803,10 @@ http://localhost:8080/user/login
 
 ##  Hasil Akhir
 
-* User dapat login ✔
-* Session tersimpan ✔
-* Halaman admin terlindungi ✔
-* Redirect berjalan dengan baik ✔
+* User dapat login 
+* Session tersimpan 
+* Halaman admin terlindungi 
+* Redirect berjalan dengan baik 
 
 ![WhatsApp Image 2026-04-03 at 12 41 50](https://github.com/user-attachments/assets/5dcd7c1e-a0ea-4821-a3ad-f28b952d20fd)
 
