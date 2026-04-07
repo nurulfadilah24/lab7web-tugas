@@ -248,9 +248,7 @@ Tampilan Error 404 saat Mengakses Router Faqs
 
 <img width="793" height="496" alt="Screenshot 2026-03-03 231810" src="https://github.com/user-attachments/assets/1eaab14e-ad98-408c-a33f-5b6338c5bc92" />
 
-
-
-
+---
 
 
 # Lab 7 Praktikum 2 Pemrograman Web 2 – CodeIgniter 4 CRUD
@@ -258,18 +256,22 @@ Tampilan Error 404 saat Mengakses Router Faqs
 ---
 
 ## Deskripsi
-Praktikum ini bertujuan membuat aplikasi **CRUD sederhana** menggunakan **CodeIgniter 4** dengan studi kasus **Data Artikel**.  
+Praktikum ini bertujuan untuk membuat aplikasi CRUD sederhana menggunakan Framework CodeIgniter 4 dengan studi kasus Data Artikel. 
 
 Tujuan praktikum:  
-1. Memahami konsep **Model** di CI4.  
-2. Memahami konsep dasar **CRUD** (Create, Read, Update, Delete).  
-3. Membuat aplikasi web sederhana menggunakan CI4.  
-
+Memahami konsep dasar Model di CodeIgniter 4.
+Memahami konsep dasar CRUD (Create, Read, Update, Delete).
+Mampu membuat program sederhana menggunakan framework CI4.
 ---
 
+## persiapan
+
+Pastikan XAMPP sudah terinstall dan MySQL dapat dijalankan.
+Siapkan text editor seperti VSCode.
+Buat folder project lab7_php_ci di htdocs.
+
+
 ## Struktur Folder Project
-
-
 
 lab7_php_ci/
 │
@@ -301,8 +303,9 @@ lab7_php_ci/
 
 ---
 
-## 1. Membuat Database dan Tabel
-Buat database `lab_ci4` dan tabel `artikel`:
+## 1.Membuat Database
+
+Buka phpMyAdmin atau MySQL CLI, lalu buat database:
 
 ```sql
 CREATE DATABASE lab_ci4;
@@ -318,19 +321,18 @@ CREATE TABLE artikel (
 
 ---
 
-## 2. Konfigurasi Database
+## 2.Konfigurasi Database
 
-File .env:
+Edit file .env di root project CI4:
 
 database.default.hostname = localhost
 database.default.database = lab_ci4
 database.default.username = root
 database.default.password = 
 database.default.DBDriver = MySQLi
-
 ---
 
-## 3. Membuat Model
+## 3. Membuat Modell
 
 File: app/Models/ArtikelModel.php
 
@@ -365,75 +367,13 @@ class Artikel extends BaseController
         $artikel = $model->findAll();
         return view('artikel/index', compact('artikel', 'title'));
     }
-
-    public function view($slug)
-    {
-        $model = new ArtikelModel();
-        $artikel = $model->where(['slug' => $slug])->first();
-        if (!$artikel) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        $title = $artikel['judul'];
-        return view('artikel/detail', compact('artikel', 'title'));
-    }
-
-    public function admin_index()
-    {
-        $title = 'Daftar Artikel';
-        $model = new ArtikelModel();
-        $artikel = $model->findAll();
-        return view('artikel/admin_index', compact('artikel', 'title'));
-    }
-
-    public function add()
-    {
-        $validation = \Config\Services::validation();
-        $validation->setRules(['judul' => 'required']);
-        $isDataValid = $validation->withRequest($this->request)->run();
-        if ($isDataValid)
-        {
-            $artikel = new ArtikelModel();
-            $artikel->insert([
-                'judul' => $this->request->getPost('judul'),
-                'isi' => $this->request->getPost('isi'),
-                'slug' => url_title($this->request->getPost('judul')),
-            ]);
-            return redirect('admin/artikel');
-        }
-        $title = "Tambah Artikel";
-        return view('artikel/form_add', compact('title'));
-    }
-
-    public function edit($id)
-    {
-        $artikel = new ArtikelModel();
-        $validation = \Config\Services::validation();
-        $validation->setRules(['judul' => 'required']);
-        $isDataValid = $validation->withRequest($this->request)->run();
-        if ($isDataValid)
-        {
-            $artikel->update($id, [
-                'judul' => $this->request->getPost('judul'),
-                'isi' => $this->request->getPost('isi'),
-            ]);
-            return redirect('admin/artikel');
-        }
-        $data = $artikel->where('id', $id)->first();
-        $title = "Edit Artikel";
-        return view('artikel/form_edit', compact('title', 'data'));
-    }
-
-    public function delete($id)
-    {
-        $artikel = new ArtikelModel();
-        $artikel->delete($id);
-        return redirect('admin/artikel');
-    }
 }
 
 --
 
-## 5. Routing
+## 5. Membuat View Artikel
 
-File: app/Config/Routes.php
+File:app/Views/artikel/index.php
 
 $routes->get('/artikel', 'Artikel::index');
 $routes->get('/artikel/(:any)', 'Artikel::view/$1');
@@ -457,7 +397,7 @@ form_edit.php → form edit artikel
 
 ---
 
-## 7. Contoh Data
+## 7. Menambahkan Data Contoh
 
 INSERT INTO artikel (judul, isi, slug) VALUES
 ('Artikel pertama', 'Lorem Ipsum adalah contoh teks...', 'artikel-pertama'),
@@ -503,7 +443,7 @@ Praktikum ini melatih kemampuan mahasiswa dalam membuat CRUD menggunakan CI4, me
    
 Halaman artikel adalah halaman yang menampilkan daftar semua artikel yang ada di database.
 
-![artikel](https://github.com/user-attachments/assets/03c6cc7c-f6a4-41bd-9303-9055724b5b18)
+<img width="1365" height="678" alt="artikel" src="https://github.com/user-attachments/assets/169e7a33-fa8f-4d3c-90c1-ef02f3a00e38" />
 
 ---
 
@@ -511,13 +451,14 @@ Halaman artikel adalah halaman yang menampilkan daftar semua artikel yang ada di
    
 Halaman detali artikel digunakan untuk menampilkan isi artikel secara lengkap.
 
-![detail_artikel](https://github.com/user-attachments/assets/e1ccca31-3361-4432-92c2-f5b7d905b824)
+<img width="1365" height="681" alt="detail_artikel" src="https://github.com/user-attachments/assets/37fb793b-5597-4bfd-8019-29f9abfbf74e" />
 
 ---
 
 3. Halaman Admin 
 Halaman admin adalah halaman yang digunakan untuk mengelola data artikel.
-![admin](https://github.com/user-attachments/assets/fb6cd59a-0974-40b1-a14e-9b549c49fa7e)
+
+<img width="1365" height="493" alt="admin" src="https://github.com/user-attachments/assets/49b33ea9-e845-486a-81ab-512e6ef67a50" />
 
 ---
 
@@ -525,7 +466,8 @@ Halaman admin adalah halaman yang digunakan untuk mengelola data artikel.
    
 Fitur hapus artikel digunakan untuk menghapus data artikel dari database.
 
-![hapus_artikel](https://github.com/user-attachments/assets/a286820a-edbb-4d7a-81a1-decbe5e4dd72)
+<img width="552" height="187" alt="hapus_artikel" src="https://github.com/user-attachments/assets/0806bcb4-e73e-471b-9d75-d0abbc25d1fe" />
+
 
 ---
 
@@ -533,7 +475,7 @@ Fitur hapus artikel digunakan untuk menghapus data artikel dari database.
    
 Fitur edit artikel digunakan untuk mengubah atau memperbarui data artikel yang sudah ada.
 
-![edit_artikel](https://github.com/user-attachments/assets/8343de0a-253a-4c2f-b72a-49f83d523639)
+<img width="1365" height="446" alt="edit_artikel" src="https://github.com/user-attachments/assets/724f8bc5-c3bb-4e01-8b79-c376dd413105" />
 
 ---
 
@@ -541,7 +483,7 @@ Fitur edit artikel digunakan untuk mengubah atau memperbarui data artikel yang s
    
 Fitur tambah artikel digunakan untuk menambahkan artikel ke dalam database.
 
-![tambah_artikel](https://github.com/user-attachments/assets/ba074e65-2493-4c08-bc2e-94b231b3da97)
+<img width="1365" height="420" alt="tambah_artikel" src="https://github.com/user-attachments/assets/c7eb69ff-6201-473d-9bdd-dfea5d7dce33" />
 
 ---
 
@@ -557,29 +499,29 @@ Fitur tambah artikel digunakan untuk menambahkan artikel ke dalam database.
 
 ##  Tujuan Praktikum
 
-1. Memahami konsep View Layout di CodeIgniter 4
-2. Menggunakan View Layout untuk template tampilan
-3. Memahami dan mengimplementasikan View Cell
-4. Menggunakan View Cell untuk komponen UI modular
+Memahami konsep View Layout di CodeIgniter 4
+Menggunakan View Layout untuk template tampilan
+Memahami dan mengimplementasikan View Cell
+Menggunakan View Cell untuk komponen UI modular
 
 ---
 
 ##  Langkah-Langkah Praktikum
 
-### 1. Membuat Layout Utama
+### 1.Membuat Layout Utama
 
-Membuat folder `layout` di dalam `app/Views/`, kemudian membuat file `main.php`.
+Membuat folder layout di dalam app/Views/, kemudian membuat file main.php.
 
 Fungsi:
 
-* Sebagai template utama (header, navbar, footer)
-* Menggunakan `renderSection('content')` untuk isi halaman
+Sebagai template utama (header, navbar, footer)
+Menggunakan renderSection('content') untuk isi halaman
 
 ---
 
-### 2. Modifikasi View Home
+### 2.Modifikasi View Home
 
-Mengubah file `home.php` agar menggunakan layout:
+Mengubah file home.php agar menggunakan layout:
 
 ```php
 <?= $this->extend('layout/main') ?>
@@ -637,10 +579,10 @@ orderBy('created_at', 'DESC')
 
 Pada praktikum ini, mahasiswa berhasil:
 
-* Menggunakan View Layout untuk template
-* Menggunakan View Cell untuk sidebar
-* Menampilkan data artikel dari database
-* Mengurutkan artikel berdasarkan tanggal terbaru
+Menggunakan View Layout untuk template
+Menggunakan View Cell untuk sidebar
+Menampilkan data artikel dari database
+Mengurutkan artikel berdasarkan tanggal terbaru
 
 ## Screenshot
 
