@@ -656,16 +656,16 @@ Pada praktikum ini, mahasiswa berhasil:
 ## Pertanyaan dan Tugas 
 1. Apa manfaat utama dari penggunaan View Layout dalam pengembangan aplikasi?
 
-jawab: View Layout digunakan untuk membuat template tampilan utama yang dapat digunakan ulang sehingga menghindari duplikasi kode, menjaga konsistensi desain, serta      memudahkan proses pengembangan dan maintenance aplikasi.
+jawab: Memudahkan pengelolaan tampilan yang konsisten (header, footer, sidebar) di seluruh halaman aplikasi tanpa menulis ulang kode.
 
 2. Jelaskan perbedaan antara View Cell dan View biasa.
 
-jawab: View Cell digunakan untuk membuat komponen kecil yang dapat dipanggil di dalam view dan bisa digunakan kembali di berbagai halaman, sedangkan View biasa digunakan untuk menampilkan satu halaman penuh yang dipanggil dari controller.
+jawab: View biasa: Hanya menampilkan template dari Controller secara langsung.
+View Cell: Komponen kecil yang bisa dipanggil di view lain, bersifat modular dan bisa menerima parameter
 
 3. Ubah View Cell agar hanya menampilkan post dengan kategori tertentu. 
 
-jawab: View Cell dapat diubah agar hanya menampilkan post dengan kategori tertentu dengan menambahkan parameter kategori pada method dan menggunakan query where untuk memfilter data sesuai kategori yang diinginkan.
-
+jawab: Untuk menampilkan post berdasarkan kategori tertentu, View Cell dapat dibuat menerima input kategori sebagai parameter, kemudian memanggil model dengan kondisi where('kategori', $kategori) agar hanya data sesuai kategori yang dikirimkan yang ditampilkan.
 
 ---
 
