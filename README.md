@@ -1,4 +1,4 @@
-# Lab7Web - Praktikum 1 Pemrograman Web 2 (CodeIgniter 4)
+# Lab7Web - Praktikum Pemrograman Web 2 (CodeIgniter 4)
 
 ## Nama: Nurul Fadilah
 ## Nim: 312410689
@@ -191,3 +191,355 @@ http://localhost:8080/page/tos
 ## kesimpulan
 
 Praktikum ini menunjukkan bahwa CodeIgniter 4 memudahkan pembuatan aplikasi web dengan konsep MVC, routing, template, dan debugging sehingga logika, data, dan tampilan dapat dikelola secara terstruktur dan efisien.
+
+
+##  Screenshot
+
+## Istalasi Codeigniter 4 
+
+<img width="1365" height="381" alt="Screenshot 2026-03-03 211446" src="https://github.com/user-attachments/assets/a1de5abc-b287-4886-a55c-bb3274ca9ed0" />
+
+---
+
+## Routes List 
+
+<img width="872" height="454" alt="Screenshot 2026-03-03 223115" src="https://github.com/user-attachments/assets/b071ea76-8ef3-4940-a218-a89afd26d931" />
+
+---
+
+## Tampilan Error 404 saat Mengakses Router About
+
+<img width="845" height="167" alt="image" src="https://github.com/user-attachments/assets/27674c1c-6434-496b-a856-3274bc9b56e8" />
+
+
+---
+
+Tampilan Error 404 saat Mengakses Router Contact
+
+<img width="912" height="183" alt="image" src="https://github.com/user-attachments/assets/f4ca8a7b-7a5e-4014-9593-1c7cbf695946" />
+
+---
+
+Tampilan Error 404 saat Mengakses Router Faqs
+
+<img width="910" height="153" alt="image" src="https://github.com/user-attachments/assets/91fd130b-5c4a-4233-94a2-33079a81c4a6" />
+
+--- 
+
+##  Tampilan Halaman About - Berhasil Diakses
+
+<img width="389" height="114" alt="Screenshot 2026-03-03 222654" src="https://github.com/user-attachments/assets/ca05bb59-690f-4ad1-80f4-da2a6fccba7c" />
+
+---
+
+## Tampilan Halaman  Terms of Service - Berhasil Diakses
+
+<img width="677" height="154" alt="Screenshot 2026-03-03 223906" src="https://github.com/user-attachments/assets/147af805-bac0-47ea-aefc-9eda0b608794" />
+
+---
+
+## Tampilan Halaman About - Versi Modifikasi
+
+<img width="567" height="173" alt="Screenshot 2026-03-03 225103" src="https://github.com/user-attachments/assets/7808353e-8b85-4f3b-a4fd-8d08f819e219" />
+
+---
+
+## Tampilan Halaman About dengan Layout Sederhana
+
+<img width="793" height="496" alt="Screenshot 2026-03-03 231810" src="https://github.com/user-attachments/assets/1eaab14e-ad98-408c-a33f-5b6338c5bc92" />
+
+
+
+
+
+
+# Lab 7 Praktikum 2 Pemrograman Web 2 – CodeIgniter 4 CRUD
+
+---
+
+## Deskripsi
+Praktikum ini bertujuan membuat aplikasi **CRUD sederhana** menggunakan **CodeIgniter 4** dengan studi kasus **Data Artikel**.  
+
+Tujuan praktikum:  
+1. Memahami konsep **Model** di CI4.  
+2. Memahami konsep dasar **CRUD** (Create, Read, Update, Delete).  
+3. Membuat aplikasi web sederhana menggunakan CI4.  
+
+---
+
+## Struktur Folder Project
+
+
+
+lab7_php_ci/
+│
+├─ app/
+│ ├─ Controllers/
+│ │ └─ Artikel.php
+│ ├─ Models/
+│ │ └─ ArtikelModel.php
+│ └─ Views/
+│ ├─ artikel/
+│ │ ├─ index.php
+│ │ ├─ detail.php
+│ │ ├─ admin_index.php
+│ │ ├─ form_add.php
+│ │ └─ form_edit.php
+│ └─ template/
+│ ├─ header.php
+│ ├─ footer.php
+│ ├─ admin_header.php
+│ └─ admin_footer.php
+│
+├─ public/
+│ └─ gambar/ (tempat menyimpan file gambar artikel)
+│
+├─ .env (konfigurasi database)
+└─ composer.json
+
+
+
+---
+
+## 1. Membuat Database dan Tabel
+Buat database `lab_ci4` dan tabel `artikel`:
+
+```sql
+CREATE DATABASE lab_ci4;
+
+CREATE TABLE artikel (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    judul VARCHAR(200) NOT NULL,
+    isi TEXT,
+    gambar VARCHAR(200),
+    status TINYINT(1) DEFAULT 0,
+    slug VARCHAR(200)
+);
+
+---
+
+## 2. Konfigurasi Database
+
+File .env:
+
+database.default.hostname = localhost
+database.default.database = lab_ci4
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+
+---
+
+## 3. Membuat Model
+
+File: app/Models/ArtikelModel.php
+
+<?php
+namespace App\Models;
+use CodeIgniter\Model;
+
+class ArtikelModel extends Model
+{
+    protected $table = 'artikel';
+    protected $primaryKey = 'id';
+    protected $useAutoIncrement = true;
+    protected $allowedFields = ['judul', 'isi', 'status', 'slug', 'gambar'];
+}
+
+---
+
+## 4. Membuat Controller
+
+File: app/Controllers/Artikel.php
+
+<?php
+namespace App\Controllers;
+use App\Models\ArtikelModel;
+
+class Artikel extends BaseController
+{
+    public function index()
+    {
+        $title = 'Daftar Artikel';
+        $model = new ArtikelModel();
+        $artikel = $model->findAll();
+        return view('artikel/index', compact('artikel', 'title'));
+    }
+
+    public function view($slug)
+    {
+        $model = new ArtikelModel();
+        $artikel = $model->where(['slug' => $slug])->first();
+        if (!$artikel) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        $title = $artikel['judul'];
+        return view('artikel/detail', compact('artikel', 'title'));
+    }
+
+    public function admin_index()
+    {
+        $title = 'Daftar Artikel';
+        $model = new ArtikelModel();
+        $artikel = $model->findAll();
+        return view('artikel/admin_index', compact('artikel', 'title'));
+    }
+
+    public function add()
+    {
+        $validation = \Config\Services::validation();
+        $validation->setRules(['judul' => 'required']);
+        $isDataValid = $validation->withRequest($this->request)->run();
+        if ($isDataValid)
+        {
+            $artikel = new ArtikelModel();
+            $artikel->insert([
+                'judul' => $this->request->getPost('judul'),
+                'isi' => $this->request->getPost('isi'),
+                'slug' => url_title($this->request->getPost('judul')),
+            ]);
+            return redirect('admin/artikel');
+        }
+        $title = "Tambah Artikel";
+        return view('artikel/form_add', compact('title'));
+    }
+
+    public function edit($id)
+    {
+        $artikel = new ArtikelModel();
+        $validation = \Config\Services::validation();
+        $validation->setRules(['judul' => 'required']);
+        $isDataValid = $validation->withRequest($this->request)->run();
+        if ($isDataValid)
+        {
+            $artikel->update($id, [
+                'judul' => $this->request->getPost('judul'),
+                'isi' => $this->request->getPost('isi'),
+            ]);
+            return redirect('admin/artikel');
+        }
+        $data = $artikel->where('id', $id)->first();
+        $title = "Edit Artikel";
+        return view('artikel/form_edit', compact('title', 'data'));
+    }
+
+    public function delete($id)
+    {
+        $artikel = new ArtikelModel();
+        $artikel->delete($id);
+        return redirect('admin/artikel');
+    }
+}
+
+--
+
+## 5. Routing
+
+File: app/Config/Routes.php
+
+$routes->get('/artikel', 'Artikel::index');
+$routes->get('/artikel/(:any)', 'Artikel::view/$1');
+
+$routes->group('admin', function($routes) {
+    $routes->get('artikel', 'Artikel::admin_index');
+    $routes->add('artikel/add', 'Artikel::add');
+    $routes->add('artikel/edit/(:any)', 'Artikel::edit/$1');
+    $routes->get('artikel/delete/(:any)', 'Artikel::delete/$1');
+});
+
+---
+
+## 6. View
+
+index.php → menampilkan daftar artikel
+detail.php → menampilkan detail artikel
+admin_index.php → daftar artikel untuk admin
+form_add.php → form tambah artikel
+form_edit.php → form edit artikel
+
+---
+
+## 7. Contoh Data
+
+INSERT INTO artikel (judul, isi, slug) VALUES
+('Artikel pertama', 'Lorem Ipsum adalah contoh teks...', 'artikel-pertama'),
+('Artikel kedua', 'Tidak seperti anggapan banyak orang...', 'artikel-kedua');
+
+---
+
+## 8. Menjalankan Aplikasi
+
+untuk menjalankan aplikasi codeIgniter gunankan perintah:
+
+```
+php spark serve
+```
+
+kemudian buka browser da akses:
+
+```
+http://localhost:8080
+```
+
+Untuk halaman artikel:
+```
+http://localhost:8080/artikel
+```
+
+Untuk halaman admin:
+
+```
+http://localhost:8080/admin/artikel
+```
+
+---
+
+# Kesimpulan
+
+Praktikum ini melatih kemampuan mahasiswa dalam membuat CRUD menggunakan CI4, menghubungkan Model, Controller, dan View, serta menerapkan routing dan form validation.
+
+# Screenshot
+
+1. Halaman Artikel
+
+Halaman artikel adalah halaman yang menampilkan daftar semua artikel yang ada di database.
+<img width="1365" height="678" alt="artikel" src="https://github.com/user-attachments/assets/8b63e952-1d3e-4fe2-81e7-004ffa0c593b" />
+
+
+---
+
+2. Halaman Detail Artikel
+
+Halaman detali artikel digunakan untuk menampilkan isi artikel secara lengkap.
+
+<img width="1365" height="681" alt="detail artikel" src="https://github.com/user-attachments/assets/486f647f-b2cf-4b92-8755-3624b0718f7b" />
+
+---
+
+3. Halaman Admin
+
+Halaman admin adalah halaman yang digunakan untuk mengelola data artikel.
+
+<img width="1365" height="493" alt="admin" src="https://github.com/user-attachments/assets/8a6e4a62-c561-4dd9-b43b-52caf1badc76" />
+
+---
+
+4. Hapus Artikel
+
+Fitur hapus artikel digunakan untuk menghapus data artikel dari database.
+
+<img width="552" height="187" alt="hapus artikel" src="https://github.com/user-attachments/assets/db8380ba-7139-45d0-9b0a-f0285d071fa4" />
+
+---
+
+5. Edit Artikel
+
+Fitur edit artikel digunakan untuk mengubah atau memperbarui data artikel yang sudah ada.
+
+<img width="1365" height="446" alt="edit artikel" src="https://github.com/user-attachments/assets/c5a3e536-c6e2-47d6-a93b-34b3ad64a199" />
+
+---
+
+6. Tambah Artikel
+
+Fitur tambah artikel digunakan untuk menambahkan artikel ke dalam database.
+
+<img width="1365" height="420" alt="tambah artikel" src="https://github.com/user-attachments/assets/b4a24131-d3f5-4194-b52c-dddaca90b014" />
