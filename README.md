@@ -548,26 +548,7 @@ Fitur tambah artikel digunakan untuk menambahkan artikel ke dalam database.
 
 
 ---
-
-## Screenshot
-
-**Halaman Admin:**  
-![Admin](screenshots/admin.png)  
-
-**Daftar Artikel:**  
-![Artikel](screenshots/artikel.png)  
-
-**Detail Artikel:**  
-![Detail Artikel](screenshots/detail artikel.png)  
-
-**Edit Artikel:**  
-![Edit Artikel](screenshots/edit artikel.png)  
-
-**Hapus Artikel:**  
-![Hapus Artikel](screenshots/hapus artikel.png)  
-
-**Tambah Artikel:**  
-![Tambah Artikel](screenshots/tambah artikel.png)  
+  
 
 ---
 
